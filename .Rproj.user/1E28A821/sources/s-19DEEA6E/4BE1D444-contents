@@ -53,15 +53,15 @@ for(numN in c(5, 10, 20, 40)){
     rede = mlp(x_train,
                y_train,
                size = numN,
-               maxit = 20000,
+               maxit = 2000,
                initFunc =  "Randomize_Weigths",
                learnFunc = "Rprop",
                initFuncParams =  c(-0.3, 0.3),
                hiddenActFunc =  'Act_Logistic',
                shufflePatterns = T,
-               linOut = F)
+               linOut = T)
     errTrain[i] = rede$IterativeFitError[length(rede$IterativeFitError)]
-    yhat =  as.matrix(as.numeric(predict(rede, x_train)>=0))
+    yhat =  predict(rede, x_train)
     
     errTest[i] = MSE(as.matrix(y_test), yhat)
   }
